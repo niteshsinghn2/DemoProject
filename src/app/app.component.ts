@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl,FormBuilder, Validators } from '@angular/forms'
+
+import { groupBy } from 'rxjs/internal/operators/groupBy';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Dynamic';
+  //title = 'Dynamic';
+  
+ 
+ 
+  
 }
+
+ 
+ 
+ 
