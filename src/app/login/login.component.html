@@ -1,21 +1,19 @@
-<h2>Login</h2>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">Login</button>
-        <a [routerLink]="['/register']" class="btn btn-link">Register</a>
-    </div>
+<div id="logreg-forms">
+<form [formGroup]="dynamicForm" *ngIf="dynamicForm"(ngSubmit)="onSubmit()" class="form-signin" novalidate>
+	<ng-container *ngFor="let controls of loginForm">
+		{{controls.label}}
+		<input [type]="controls.type" class="form-control" [formControlName]="controls.label"/>
+      <ng-container *ngFor="let validation of controls.validations">
+        <span *ngIf="dynamicForm.controls[controls.label].touched && dynamicForm.controls[controls.label].errors">
+          <p *ngIf="dynamicForm.controls[controls.label].errors[validation.name]">
+            {{validation.message}}
+          </p>
+        </span>
+    </ng-container>
+    <br>
+  </ng-container>
+  <br>
+  <button type="submit" [disabled]="!dynamicForm.valid" class="btn btn-primary">Submit</button>
+  <button type = "register" [routerLink]="['/register']" class="btn btn-link" style="margin-top:10px;">Register</button>
 </form>
+</div>
